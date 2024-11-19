@@ -1,0 +1,23 @@
+
+
+<div class="container">
+  <div class="target">
+    <div class="pantalla">
+      <input type="text" pInputText [(ngModel)]="value" />
+    </div>
+    <div class="taclado">
+      @for (row of buttonLayout; track $index) {
+        <div class="fila">
+          @for (button of row; track $index) {
+            <div class="colum">
+              <p-button 
+              [label]="button.label" 
+              (onClick)="onButtonClick(button)"
+              />
+            </div>
+          }
+        </div>
+      }      
+    </div>
+  </div>
+</div>
