@@ -1,0 +1,33 @@
+<div class="d-flex justify-content-center align-items-start" style="height: 100vh; margin-top: 100px;">
+  <div class="card p-4" style="width: 500px; background-color: #f0f8ff; border-radius: 15px;">
+    <div class="card-body">
+      <h1 class="text-center text-primary">Consulta de Cliente</h1>
+      <p class="text-left text-secondary">Todos los campos son obligatorios</p>
+      <form>
+        <div class="mb-3">
+          <label for="tipoDocumento" class="form-label text-primary">Tipo de Documento</label>
+          <select id="tipoDocumento" class="form-select" style="color: black; background-color: white;"
+            [(ngModel)]="tipoDocumento" name="tipoDocumento" (change)="validarFormulario()">
+            <option value="" disabled selected>Seleccione un tipo de documento</option>
+            <option value="C">Cédula de ciudadanía</option>
+            <option value="P">Pasaporte</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="numeroDocumento" class="form-label text-primary">Número de Documento</label>
+          <input type="text" id="numeroDocumento" class="form-control" style="color: black; background-color: white;"
+            [(ngModel)]="numeroDocumento" name="numeroDocumento" (input)="formatNumeroDocumento()"
+            (keyup)="validarFormulario()" placeholder="Ingrese su número de documento" />
+        </div>
+        <div class="text-center mt-4">
+          
+          <button class="btn w-100  {{botonActivo ? 'btn-primary':'btn-secondary'}}" style="border-radius: 50px; height: 50px;" [disabled]="!botonActivo"
+            (click)="buscarCliente()">
+            Buscar
+          </button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

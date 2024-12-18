@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "e3c08dc5-9029-4231-bbad-66d5355f8d55",
+		"name": "PeticionesPruebaPostman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36913506"
+	},
+	"item": [
+		{
+			"name": "Código 200",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/cliente?tipoDocumento=C&numeroDocumento=23445322",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"cliente"
+					],
+					"query": [
+						{
+							"key": "tipoDocumento",
+							"value": "C"
+						},
+						{
+							"key": "numeroDocumento",
+							"value": "23445322"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Código 400",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/cliente?tipoDocumento=X&numeroDocumento=23445322",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"cliente"
+					],
+					"query": [
+						{
+							"key": "tipoDocumento",
+							"value": "X"
+						},
+						{
+							"key": "numeroDocumento",
+							"value": "23445322"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Código 400",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/cliente?tipoDocumento=C",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"cliente"
+					],
+					"query": [
+						{
+							"key": "tipoDocumento",
+							"value": "C"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Código 404",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/cliente?tipoDocumento=C&numeroDocumento=12345678",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"cliente"
+					],
+					"query": [
+						{
+							"key": "tipoDocumento",
+							"value": "C"
+						},
+						{
+							"key": "numeroDocumento",
+							"value": "12345678"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

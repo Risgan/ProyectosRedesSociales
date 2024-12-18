@@ -1,0 +1,198 @@
+﻿@page "/"
+@using Pomodoro.Components.Models
+@using Pomodoro.Components.Services.Interfaces
+@inject IConfiguracionService ConfigService;
+@inject ITimerService TimerService;
+@inject NavigationManager NavigationManager;
+
+<div class="pomodoro-container" >
+    <div class="boton-pausa">
+        @if (temporizadorActivo)
+        {
+            <button class="btn btn-warning" @onclick="Pausar">Pausar</button>
+        }
+        else if (temporizadorPausado)
+        {
+            <button class="btn btn-success" @onclick="Reanudar">Reanudar</button>
+        }
+    </div>
+
+    <div class="estado-display">
+        <span>Estado: @estadoActual</span>
+    </div>
+
+    <div class="botones-control">
+        @if (!temporizadorActivo && !temporizadorPausado)
+        {
+            <button class="btn btn-primary" @onclick="Iniciar">Iniciar</button>
+        }
+        else if (!temporizadorActivo && temporizadorPausado)
+        {
+            <button class="btn btn-success" @onclick="Reanudar">Reanudar</button>
+            <button class="btn btn-danger" @onclick="Detener">Detener</button>
+        }
+    </div>
+
+    <div class="contador-pomodoros">
+        <span>Pomodoros Completados: @contadorPomodoros</span>
+    </div>
+
+    @if (!string.IsNullOrEmpty(mensaje))
+    {
+            <div class="alert @alertClass">
+            @mensaje
+            </div>
+    }
+</div>
+
+
+@code{
+    private bool temporizadorActivo = false;
+    private bool temporizadorPausado = false;
+    private TimeSpan tiempoRestante = TimeSpan.Zero;
+    private string estadoActual = "En Trabajo";
+    private int contadorPomodoros = 0;
+    private string mensaje = string.Empty;
+    private string alertClass = "alert-info";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // Obtener las configuraciones actuales
+            var config = await ConfigService.ObtenerConfiguracionAsync();
+            tiempoRestante = TimeSpan.FromMinutes(config.TiempoTrabajo);
+
+            // Suscribirse a los eventos del TimerService
+            TimerService.OnTimerTick += ActualizarTiempo;
+            TimerService.OnTimerComplete += FinalizarPomodoro;
+        }
+        catch (Exception ex)
+        {
+            MostrarMensaje($"Error al cargar configuraciones: {ex.Message}", "alert-danger");
+        }
+    }
+
+    /// <summary>
+    /// Inicia el temporizador Pomodoro.
+    /// </summary>
+    private void Iniciar()
+    {
+        TimerService.StartTimer(tiempoRestante);
+        temporizadorActivo = true;
+        temporizadorPausado = false;
+        estadoActual = "En Trabajo";
+        MostrarMensaje("Temporizador iniciado.", "alert-success");
+    }
+
+    /// <summary>
+    /// Pausa el temporizador Pomodoro.
+    /// </summary>
+    private void Pausar()
+    {
+        TimerService.PauseTimer();
+        temporizadorActivo = false;
+        temporizadorPausado = true;
+        estadoActual = "Pausado";
+        MostrarMensaje("Temporizador pausado.", "alert-warning");
+    }
+
+    /// <summary>
+    /// Reanuda el temporizador Pomodoro.
+    /// </summary>
+    private void Reanudar()
+    {
+        TimerService.StartTimer(tiempoRestante);
+        temporizadorActivo = true;
+        temporizadorPausado = false;
+        estadoActual = "En Trabajo";
+        MostrarMensaje("Temporizador reanudado.", "alert-success");
+    }
+
+    /// <summary>
+    /// Detiene el temporizador Pomodoro.
+    /// </summary>
+    private void Detener()
+    {
+        TimerService.StopTimer();
+        temporizadorActivo = false;
+        temporizadorPausado = false;
+        tiempoRestante = TimeSpan.Zero;
+        estadoActual = "Detenido";
+        MostrarMensaje("Temporizador detenido.", "alert-danger");
+    }
+
+    /// <summary>
+    /// Navega a la página de configuración.
+    /// </summary>
+    private void NavegarAConfiguracion()
+    {
+        NavigationManager.NavigateTo("/configuracion");
+    }
+
+    /// <summary>
+    /// Actualiza el tiempo restante en la interfaz de usuario.
+    /// </summary>
+    /// <param name="tiempo">Tiempo restante.</param>
+    private void ActualizarTiempo(TimeSpan tiempo)
+    {
+        tiempoRestante = tiempo;
+        InvokeAsync(StateHasChanged);
+    }
+
+    /// <summary>
+    /// Maneja la finalización del temporizador.
+    /// </summary>
+    private void FinalizarPomodoro()
+    {
+        temporizadorActivo = false;
+        temporizadorPausado = false;
+        contadorPomodoros++;
+
+        // Determina si iniciar descanso corto o largo
+        if (contadorPomodoros % 4 == 0)
+        {
+            // Iniciar descanso largo
+            estadoActual = "Descanso Largo";
+            tiempoRestante = TimeSpan.FromMinutes(15); // Puedes ajustar según configuración
+            MostrarMensaje("¡Descanso Largo!", "alert-info");
+        }
+        else
+        {
+            // Iniciar descanso corto
+            estadoActual = "Descanso Corto";
+            tiempoRestante = TimeSpan.FromMinutes(5); // Puedes ajustar según configuración
+            MostrarMensaje("¡Descanso Corto!", "alert-info");
+        }
+
+        // Reiniciar el temporizador para el siguiente ciclo
+        TimerService.StartTimer(tiempoRestante);
+        temporizadorActivo = true;
+    }
+
+    /// <summary>
+    /// Muestra mensajes de estado al usuario.
+    /// </summary>
+    /// <param name="msg">Mensaje a mostrar.</param>
+    /// <param name="cssClass">Clase CSS para el estilo del mensaje.</param>
+    private void MostrarMensaje(string msg, string cssClass)
+    {
+        mensaje = msg;
+        alertClass = cssClass;
+
+        // Ocultar el mensaje después de 3 segundos
+        Task.Run(async () =>
+        {
+            await Task.Delay(3000);
+            mensaje = string.Empty;
+            await InvokeAsync(StateHasChanged);
+        });
+    }
+
+    public void Dispose()
+    {
+        // Desuscribirse de los eventos para evitar fugas de memoria
+        TimerService.OnTimerTick -= ActualizarTiempo;
+        TimerService.OnTimerComplete -= FinalizarPomodoro;
+    }
+}

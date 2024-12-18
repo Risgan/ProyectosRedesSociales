@@ -6,9 +6,9 @@ import os
 pygame.init()
 
 # Definimos el tamaño de la pantalla
-ANCHO_VENTANA = 800
-ALTO_VENTANA = 800
-TAM_CELDA = 20
+ANCHO_VENTANA = 950
+ALTO_VENTANA = 950
+TAM_CELDA = 15
 N = ANCHO_VENTANA // TAM_CELDA
 M = ALTO_VENTANA // TAM_CELDA
 

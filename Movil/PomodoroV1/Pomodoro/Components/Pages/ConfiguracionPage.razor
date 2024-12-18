@@ -1,0 +1,113 @@
+﻿@page "/configuracion"
+@using Pomodoro.Components.Models;
+@using Pomodoro.Components.Services.Interfaces
+@inject IConfiguracionService ConfigService;
+@inject NavigationManager NavigationManager;
+
+<h1>Configuración Pomodoro</h1>
+
+<div class="configuracion-container">
+
+    @if (!string.IsNullOrEmpty(mensajeError))
+    {
+        <div class="alert alert-danger">
+            @mensajeError
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(mensajeExito))
+    {
+        <div class="alert alert-success">
+            @mensajeExito
+        </div>
+    }
+
+    <EditForm Model="nuevaConfiguracion" OnInvalidSubmit="GuardarConfiguracion">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label for="tiempoTrabajo">Tiempo de trabajo (minutos):</label>
+            <InputNumber id="tiempoTrabajo" class="form-control" @bind-Value="nuevaConfiguracion.TiempoTrabajo" min=1/>
+            <ValidationMessage For="@(() => nuevaConfiguracion.TiempoTrabajo)" />
+        </div>
+
+        <div class="form-group">
+            <label for="tiempoDescansoCorto">Tiempo de trabajo (minutos):</label>
+            <InputNumber id="tiempoDescansoCorto" class="form-control" @bind-Value="nuevaConfiguracion.TiempoDescansoCorto" min=1/>
+            <ValidationMessage For="@(() => nuevaConfiguracion.TiempoDescansoCorto)" />
+        </div>
+
+        <div class="form-group">
+            <label for="tiempoDescansoLargo">Tiempo de trabajo (minutos):</label>
+            <InputNumber id="tiempoDescansoLargo" class="form-control" @bind-Value="nuevaConfiguracion.TiempoDescansoLargo" min=1/>
+            <ValidationMessage For="@(() => nuevaConfiguracion.TiempoDescansoLargo)" />
+        </div>
+
+        <div class="botones">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="button" class="btn btn-secondary" @onclick="Regresar">Regresar</button>
+
+        </div>
+
+    </EditForm>
+
+</div>
+
+@code {
+    private string mensajeError = string.Empty;
+    private string mensajeExito = string.Empty;
+    private Configuracion nuevaConfiguracion = new Configuracion();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            nuevaConfiguracion = await ConfigService.ObtenerConfiguracionAsync();
+        }
+        catch (Exception ex)
+        {
+
+            mensajeError = $"Error al cargar las configuraciones: {ex.Message}";
+        }
+    }
+
+    private async void GuardarConfiguracion()
+    {
+        try
+        {
+            if (nuevaConfiguracion.TiempoTrabajo <=0 ||
+                nuevaConfiguracion.TiempoDescansoCorto <= 0 ||
+                nuevaConfiguracion.TiempoDescansoLargo <= 0 )
+            {
+                mensajeError = "Todos los tiempos deben ser mayores a cero";
+                mensajeExito = string.Empty;
+                return;
+            }
+
+            await ConfigService.ActualizarConfiguracionAsync(nuevaConfiguracion);
+
+            mensajeExito = "Configuracion guardada";
+            mensajeError = string.Empty;
+
+        }
+        catch (ArgumentException ex)
+        {
+            mensajeError = ex.Message;
+            mensajeExito = string.Empty;
+        }
+        catch (Exception ex)
+        {
+
+            mensajeError = ex.Message;
+            mensajeExito = string.Empty;
+
+        }
+    }
+
+    private void Regresar()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}
