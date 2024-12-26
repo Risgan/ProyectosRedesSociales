@@ -20,6 +20,7 @@ namespace Pomodoro
 
             builder.Services.AddSingleton<ITimerService, TimerService>();
             builder.Services.AddSingleton<IConfiguracionService, ConfigruacionService>();
+            builder.Services.AddSingleton<ISecuenciaService, SecuenciaService>();
 
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();

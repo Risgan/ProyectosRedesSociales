@@ -3,196 +3,210 @@
 @using Pomodoro.Components.Services.Interfaces
 @inject IConfiguracionService ConfigService;
 @inject ITimerService TimerService;
+@inject ISecuenciaService SecuenciaService;
 @inject NavigationManager NavigationManager;
 
-<div class="pomodoro-container" >
-    <div class="boton-pausa">
-        @if (temporizadorActivo)
-        {
-            <button class="btn btn-warning" @onclick="Pausar">Pausar</button>
-        }
-        else if (temporizadorPausado)
-        {
-            <button class="btn btn-success" @onclick="Reanudar">Reanudar</button>
-        }
+ @if (estado != Secuencia.Empezar)
+{  
+    <div class="botones">
+        <button class="btn btn-primary radius" @onclick="Pausar">Pause</button>
+        <button class="btn btn-danger radius" @onclick="Detener">Detener</button>
     </div>
+}
 
-    <div class="estado-display">
-        <span>Estado: @estadoActual</span>
-    </div>
-
-    <div class="botones-control">
-        @if (!temporizadorActivo && !temporizadorPausado)
-        {
-            <button class="btn btn-primary" @onclick="Iniciar">Iniciar</button>
-        }
-        else if (!temporizadorActivo && temporizadorPausado)
-        {
-            <button class="btn btn-success" @onclick="Reanudar">Reanudar</button>
-            <button class="btn btn-danger" @onclick="Detener">Detener</button>
-        }
-    </div>
-
-    <div class="contador-pomodoros">
-        <span>Pomodoros Completados: @contadorPomodoros</span>
-    </div>
-
-    @if (!string.IsNullOrEmpty(mensaje))
-    {
-            <div class="alert @alertClass">
-            @mensaje
+<div class="contenedor @colorClass" @onclick="Pausar">
+    <div class="pomodoro">
+        <div class="target">
+            <div class="contador">
+                @if (tiempo.Hours > 0)
+                {
+                    @tiempo.ToString(@"hh\:mm\:ss")
+                }
+                else if (tiempo.Minutes > 0)
+                {
+                    @tiempo.ToString(@"mm\:ss")
+                }
+                else
+                {
+                    @tiempo.ToString(@"ss")
+                }
             </div>
-    }
+            <div class="estado">
+                @SecuenciaNombres.Where(data => data.Key == estado).FirstOrDefault().Value
+            </div>
+            @if (estado == Secuencia.Empezar)
+            {        
+                <div class="texto">
+                    <h4>Toque la  pantalla para comenzar</h4>
+                </div>
+            }
+        </div>
+    </div>    
 </div>
 
+<div class="configuracion">
+    <i @onclick="Config" class="bi bi-gear-fill"></i>
+</div>
 
-@code{
-    private bool temporizadorActivo = false;
-    private bool temporizadorPausado = false;
-    private TimeSpan tiempoRestante = TimeSpan.Zero;
-    private string estadoActual = "En Trabajo";
-    private int contadorPomodoros = 0;
-    private string mensaje = string.Empty;
-    private string alertClass = "alert-info";
+@code {
+    private string colorClass;
+    private Configuracion configuracion;
 
-    protected override async Task OnInitializedAsync()
+    private int hours = 0;
+    private int minuts = 1;
+    private int seconds = 3;
+
+    private Secuencia estado = Secuencia.Empezar;
+    private TimeSpan tiempo;
+    private int secuenciaId = 0;
+
+    private System.Threading.Timer timer;
+
+    private Dictionary<Secuencia, string> SecuenciaNombres = new()
     {
-        try
-        {
-            // Obtener las configuraciones actuales
-            var config = await ConfigService.ObtenerConfiguracionAsync();
-            tiempoRestante = TimeSpan.FromMinutes(config.TiempoTrabajo);
+        { Secuencia.Empezar,       "Empezar" },
+        { Secuencia.Trabajo,       "Trabajo" },
+        { Secuencia.DescansoCorto, "Descanso Corto" },
+        { Secuencia.DescansoLargo, "Descanso Largo" },
+        { Secuencia.Finalizado,    "Finalizado" }
+    };
 
-            // Suscribirse a los eventos del TimerService
-            TimerService.OnTimerTick += ActualizarTiempo;
-            TimerService.OnTimerComplete += FinalizarPomodoro;
-        }
-        catch (Exception ex)
-        {
-            MostrarMensaje($"Error al cargar configuraciones: {ex.Message}", "alert-danger");
-        }
+    protected override void OnInitialized()
+    {
+        colorClass = "colorRed";
+        configuracion = ConfigService.GetConfiguracion();
+        tiempo = new TimeSpan(hours, minuts, seconds);
+        estado = SecuenciaService.GetEjecucionById(secuenciaId);
     }
 
-    /// <summary>
-    /// Inicia el temporizador Pomodoro.
-    /// </summary>
-    private void Iniciar()
-    {
-        TimerService.StartTimer(tiempoRestante);
-        temporizadorActivo = true;
-        temporizadorPausado = false;
-        estadoActual = "En Trabajo";
-        MostrarMensaje("Temporizador iniciado.", "alert-success");
-    }
-
-    /// <summary>
-    /// Pausa el temporizador Pomodoro.
-    /// </summary>
-    private void Pausar()
-    {
-        TimerService.PauseTimer();
-        temporizadorActivo = false;
-        temporizadorPausado = true;
-        estadoActual = "Pausado";
-        MostrarMensaje("Temporizador pausado.", "alert-warning");
-    }
-
-    /// <summary>
-    /// Reanuda el temporizador Pomodoro.
-    /// </summary>
-    private void Reanudar()
-    {
-        TimerService.StartTimer(tiempoRestante);
-        temporizadorActivo = true;
-        temporizadorPausado = false;
-        estadoActual = "En Trabajo";
-        MostrarMensaje("Temporizador reanudado.", "alert-success");
-    }
-
-    /// <summary>
-    /// Detiene el temporizador Pomodoro.
-    /// </summary>
-    private void Detener()
-    {
-        TimerService.StopTimer();
-        temporizadorActivo = false;
-        temporizadorPausado = false;
-        tiempoRestante = TimeSpan.Zero;
-        estadoActual = "Detenido";
-        MostrarMensaje("Temporizador detenido.", "alert-danger");
-    }
-
-    /// <summary>
-    /// Navega a la página de configuración.
-    /// </summary>
-    private void NavegarAConfiguracion()
+    private void Config()
     {
         NavigationManager.NavigateTo("/configuracion");
     }
 
-    /// <summary>
-    /// Actualiza el tiempo restante en la interfaz de usuario.
-    /// </summary>
-    /// <param name="tiempo">Tiempo restante.</param>
-    private void ActualizarTiempo(TimeSpan tiempo)
+    private void Pausar()
     {
-        tiempoRestante = tiempo;
-        InvokeAsync(StateHasChanged);
-    }
-
-    /// <summary>
-    /// Maneja la finalización del temporizador.
-    /// </summary>
-    private void FinalizarPomodoro()
-    {
-        temporizadorActivo = false;
-        temporizadorPausado = false;
-        contadorPomodoros++;
-
-        // Determina si iniciar descanso corto o largo
-        if (contadorPomodoros % 4 == 0)
+        estado = Secuencia.DescansoCorto;
+        if (timer == null)
         {
-            // Iniciar descanso largo
-            estadoActual = "Descanso Largo";
-            tiempoRestante = TimeSpan.FromMinutes(15); // Puedes ajustar según configuración
-            MostrarMensaje("¡Descanso Largo!", "alert-info");
+            timer = new System.Threading.Timer(Tick, null, 0, 200);
         }
         else
         {
-            // Iniciar descanso corto
-            estadoActual = "Descanso Corto";
-            tiempoRestante = TimeSpan.FromMinutes(5); // Puedes ajustar según configuración
-            MostrarMensaje("¡Descanso Corto!", "alert-info");
+            timer.Dispose();
+            timer = null;
         }
-
-        // Reiniciar el temporizador para el siguiente ciclo
-        TimerService.StartTimer(tiempoRestante);
-        temporizadorActivo = true;
     }
 
-    /// <summary>
-    /// Muestra mensajes de estado al usuario.
-    /// </summary>
-    /// <param name="msg">Mensaje a mostrar.</param>
-    /// <param name="cssClass">Clase CSS para el estilo del mensaje.</param>
-    private void MostrarMensaje(string msg, string cssClass)
+    private void EjecutarAccion()
     {
-        mensaje = msg;
-        alertClass = cssClass;
-
-        // Ocultar el mensaje después de 3 segundos
-        Task.Run(async () =>
+        switch (SecuenciaService.GetSecuenciaById(secuenciaId))
         {
-            await Task.Delay(3000);
-            mensaje = string.Empty;
-            await InvokeAsync(StateHasChanged);
-        });
+            case Secuencia.Empezar:
+                break;
+            case Secuencia.Trabajo:
+                break;
+            case Secuencia.DescansoCorto:
+                break;
+            case Secuencia.DescansoLargo:
+                break;
+            case Secuencia.Finalizado:
+                break;
+        }
     }
 
-    public void Dispose()
+    private void Tick(object state)
     {
-        // Desuscribirse de los eventos para evitar fugas de memoria
-        TimerService.OnTimerTick -= ActualizarTiempo;
-        TimerService.OnTimerComplete -= FinalizarPomodoro;
+        if (tiempo.TotalSeconds > 0)
+        {
+            tiempo = tiempo.Subtract(TimeSpan.FromSeconds(1));
+            InvokeAsync(StateHasChanged);
+        }
+        else
+        {
+            timer.Dispose();
+            timer = null;
+        }
+    }
+
+    private void Detener()
+    {
+        timer?.Dispose();
+        timer = null;
+        tiempo = new TimeSpan(hours, minuts, seconds);
+        StateHasChanged();
     }
 }
+
+<style>
+    .contenedor {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .colorRed {
+        background: #FFCADE;
+        color: #EF2D30;
+    }
+
+    .colorGreen {
+        background: #E1F7E8;
+        color: #01FE52;
+    }
+
+    .colorBlue {
+        background: #C6DBFA;
+        color: #0067FF;
+    }
+
+    .colorPurple {
+        background: #DCC9F4;
+        color: #7000FE;
+    }
+
+    .colorYellow {
+        background: #FAF1C8;
+        color: #FBD010;
+    }
+
+    .botones {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+    .configuracion {
+        font-size: 2rem;
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+    }
+
+    .target {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        font-size: 3.8rem;
+        font-weight: 400;
+        font-family: Inter;
+    }
+
+    .radius {
+        border-radius: 15px;
+    }
+
+    .estado{
+        tex-aling: center;
+    }
+
+    .texto{
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        color: white;
+    }
+
+</style>

@@ -1,1 +1,0 @@
-C:\Users\johnr\Documents\Documentos\JyLNeuralNet\ProyectosRedesSociales\Movil\PomodoroV1\Pomodoro\Pomodoro.csproj;x64

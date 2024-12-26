@@ -8,11 +8,15 @@ namespace Pomodoro.Components.Services.Interfaces
 {
     public interface ITimerService
     {
-        event Action<TimeSpan> OnTimerTick;
-        event Action OnTimerComplete;
-        void StartTimer(TimeSpan duration);
-        void StopTimer();
-        void PauseTimer();
-        void RestarTimer(TimeSpan duration);
+        event Action<TimeSpan> OnTick;
+        event Action OnPomodoroCompleted;
+        event Action OnShortBreakCompleted;
+        event Action OnLongBreakCompleted;
+
+        void StartPomodoro(TimeSpan tiempoTrabajo, TimeSpan descansoCorto, TimeSpan descansoLargo);
+        void Pause();
+        void Resume();
+        void Stop();
+
     }
 }

@@ -9,7 +9,9 @@ namespace Pomodoro.Components.Services.Interfaces
 {
     public interface IConfiguracionService
     {
-        Task<Configuracion> ObtenerConfiguracionAsync();
-        Task ActualizarConfiguracionAsync(Configuracion nuevaConfiguracion);
+        Configuracion GetConfiguracion();
+        void SetConfiguracion(Configuracion configuracion);
+        void ResetDefault();
+
     }
 }

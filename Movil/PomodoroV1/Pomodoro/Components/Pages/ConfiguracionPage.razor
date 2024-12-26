@@ -4,106 +4,57 @@
 @inject IConfiguracionService ConfigService;
 @inject NavigationManager NavigationManager;
 
-<h1>Configuración Pomodoro</h1>
+<div class="contenedor">
+    <div class="botones">
 
-<div class="configuracion-container">
+        <button class="btn btn-danger raduis" @onclick="Regresar">Regresar</button>
+        <button class="btn btn-primary raduis" @onclick="Guardar">Guardar</button>
 
-    @if (!string.IsNullOrEmpty(mensajeError))
-    {
-        <div class="alert alert-danger">
-            @mensajeError
-        </div>
-    }
+    </div>
+    <div class="contenedor-config">
 
-    @if (!string.IsNullOrEmpty(mensajeExito))
-    {
-        <div class="alert alert-success">
-            @mensajeExito
-        </div>
-    }
-
-    <EditForm Model="nuevaConfiguracion" OnInvalidSubmit="GuardarConfiguracion">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-
-        <div class="form-group">
-            <label for="tiempoTrabajo">Tiempo de trabajo (minutos):</label>
-            <InputNumber id="tiempoTrabajo" class="form-control" @bind-Value="nuevaConfiguracion.TiempoTrabajo" min=1/>
-            <ValidationMessage For="@(() => nuevaConfiguracion.TiempoTrabajo)" />
+        <div class="cuadros aling-left">
+            <div class="title">
+                <h2>Tiempo Trabajo:</h2>
+                <input class="border-1 bg-white raduis size " type="number" @bind-value="_configuracion.TiempoTrabajo" />
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="tiempoDescansoCorto">Tiempo de trabajo (minutos):</label>
-            <InputNumber id="tiempoDescansoCorto" class="form-control" @bind-Value="nuevaConfiguracion.TiempoDescansoCorto" min=1/>
-            <ValidationMessage For="@(() => nuevaConfiguracion.TiempoDescansoCorto)" />
+        <div class="cuadros aling-right">
+            <div class="title">
+                <h2>Tiempo Trabajo:</h2>
+                <input class="border-1 bg-white raduis size " type="number" @bind-value="_configuracion.TiempoDescansoCorto" />
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="tiempoDescansoLargo">Tiempo de trabajo (minutos):</label>
-            <InputNumber id="tiempoDescansoLargo" class="form-control" @bind-Value="nuevaConfiguracion.TiempoDescansoLargo" min=1/>
-            <ValidationMessage For="@(() => nuevaConfiguracion.TiempoDescansoLargo)" />
+        <div class="cuadros aling-left">
+            <div class="title">
+                <h2>Tiempo Trabajo:</h2>
+                <input class="border-1 bg-white raduis size " type="number" @bind-value="_configuracion.TiempoDescansoLargo" />
+            </div>
         </div>
+    </div>
 
-        <div class="botones">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <button type="button" class="btn btn-secondary" @onclick="Regresar">Regresar</button>
-
-        </div>
-
-    </EditForm>
-
+    <div class="nota">
+        <p>
+            Establece los tiempos que se <br />
+            ejecutaran en cada ciclo
+        </p>
+    </div>
 </div>
 
 @code {
-    private string mensajeError = string.Empty;
-    private string mensajeExito = string.Empty;
-    private Configuracion nuevaConfiguracion = new Configuracion();
+    Configuracion _configuracion;
 
-
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        try
-        {
-            nuevaConfiguracion = await ConfigService.ObtenerConfiguracionAsync();
-        }
-        catch (Exception ex)
-        {
-
-            mensajeError = $"Error al cargar las configuraciones: {ex.Message}";
-        }
+        _configuracion = ConfigService.GetConfiguracion();
     }
 
-    private async void GuardarConfiguracion()
+    private void Guardar()
     {
-        try
-        {
-            if (nuevaConfiguracion.TiempoTrabajo <=0 ||
-                nuevaConfiguracion.TiempoDescansoCorto <= 0 ||
-                nuevaConfiguracion.TiempoDescansoLargo <= 0 )
-            {
-                mensajeError = "Todos los tiempos deben ser mayores a cero";
-                mensajeExito = string.Empty;
-                return;
-            }
-
-            await ConfigService.ActualizarConfiguracionAsync(nuevaConfiguracion);
-
-            mensajeExito = "Configuracion guardada";
-            mensajeError = string.Empty;
-
-        }
-        catch (ArgumentException ex)
-        {
-            mensajeError = ex.Message;
-            mensajeExito = string.Empty;
-        }
-        catch (Exception ex)
-        {
-
-            mensajeError = ex.Message;
-            mensajeExito = string.Empty;
-
-        }
+        ConfigService.SetConfiguracion(_configuracion);
+        Regresar();
     }
 
     private void Regresar()
@@ -111,3 +62,85 @@
         NavigationManager.NavigateTo("/");
     }
 }
+
+
+<style>
+    .contenedor {
+        background: #FFCADE;
+        width: 100%;
+        height: 100vh;
+    }
+
+    .botones {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        align-items: center;
+        flex-direction: row;
+        padding-top: 10px;
+        padding-right: 10px;
+        color: white;
+    }
+
+    .raduis {
+        border-radius: 15px;
+    }
+
+    .contenedor-config {
+        padding-top:50px;
+        height: 80%;        
+        display: flex;
+        flex-direction: column;
+        /* justify-content: space-between; */
+        gap:30px;
+    }
+
+    .size {
+        /* height */
+        color: #000;
+        text-align: center;
+        font-family: Inter;
+        font-size: 25px;
+        font-style: normal;
+        /* font-weight: 400; */
+        line-height: normal;
+
+        width: 120px;
+        height: 50px;
+        border-radius:15px;
+    }
+
+    .aling-left{
+        text-align: start;
+    }
+
+    .aling-right {
+        text-align: end;
+    }
+
+    .cuadros{
+        padding-left: 10px;
+        padding-right: 10px;
+        width: 100%;
+        /* text-align:end; */
+
+    }
+
+    .title{
+        display:flex;
+        flex-direction: column;
+        /* justify-content:center; */
+        align-items: center;
+    }
+
+    .nota {
+        position: absolute;
+        bottom: 20px;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: #7C7272;
+    }
+</style>

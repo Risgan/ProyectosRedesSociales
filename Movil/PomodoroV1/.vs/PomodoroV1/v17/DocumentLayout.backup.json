@@ -7,12 +7,20 @@
       "RelativeMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|solutionrelative:pomodoro\\components\\pages\\pomodoropage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|c:\\users\\johnr\\documents\\documentos\\jylneuralnet\\proyectosredessociales\\movil\\pomodorov1\\pomodoro\\components\\services\\timerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|solutionrelative:pomodoro\\components\\services\\timerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|c:\\users\\johnr\\documents\\documentos\\jylneuralnet\\proyectosredessociales\\movil\\pomodorov1\\pomodoro\\components\\models\\secuencia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|solutionrelative:pomodoro\\components\\models\\secuencia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|c:\\users\\johnr\\documents\\documentos\\jylneuralnet\\proyectosredessociales\\movil\\pomodorov1\\pomodoro\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|solutionrelative:pomodoro\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|c:\\users\\johnr\\documents\\documentos\\jylneuralnet\\proyectosredessociales\\movil\\pomodorov1\\pomodoro\\components\\services\\secuenciaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|solutionrelative:pomodoro\\components\\services\\secuenciaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|c:\\users\\johnr\\documents\\documentos\\jylneuralnet\\proyectosredessociales\\movil\\pomodorov1\\pomodoro\\components\\services\\interfaces\\isecuenciaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|solutionrelative:pomodoro\\components\\services\\interfaces\\isecuenciaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|c:\\users\\johnr\\documents\\documentos\\jylneuralnet\\proyectosredessociales\\movil\\pomodorov1\\pomodoro\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|solutionrelative:pomodoro\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|c:\\users\\johnr\\documents\\documentos\\jylneuralnet\\proyectosredessociales\\movil\\pomodorov1\\pomodoro\\components\\pages\\configuracionpage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -23,32 +31,20 @@
       "RelativeMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|solutionrelative:pomodoro\\wwwroot\\css\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|c:\\users\\johnr\\documents\\documentos\\jylneuralnet\\proyectosredessociales\\movil\\pomodorov1\\pomodoro\\components\\models\\configuracion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|solutionrelative:pomodoro\\components\\models\\configuracion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|c:\\users\\johnr\\documents\\documentos\\jylneuralnet\\proyectosredessociales\\movil\\pomodorov1\\pomodoro\\components\\services\\configruacionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|solutionrelative:pomodoro\\components\\services\\configruacionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|c:\\users\\johnr\\documents\\documentos\\jylneuralnet\\proyectosredessociales\\movil\\pomodorov1\\pomodoro\\components\\services\\interfaces\\iconfiguracionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|solutionrelative:pomodoro\\components\\services\\interfaces\\iconfiguracionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|c:\\users\\johnr\\documents\\documentos\\jylneuralnet\\proyectosredessociales\\movil\\pomodorov1\\pomodoro\\pomodoro.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|solutionrelative:pomodoro\\pomodoro.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|c:\\users\\johnr\\documents\\documentos\\jylneuralnet\\proyectosredessociales\\movil\\pomodorov1\\pomodoro\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|solutionrelative:pomodoro\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|c:\\users\\johnr\\documents\\documentos\\jylneuralnet\\proyectosredessociales\\movil\\pomodorov1\\pomodoro\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|solutionrelative:pomodoro\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|c:\\users\\johnr\\documents\\documentos\\jylneuralnet\\proyectosredessociales\\movil\\pomodorov1\\pomodoro\\components\\services\\configruacionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|solutionrelative:pomodoro\\components\\services\\configruacionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|c:\\users\\johnr\\documents\\documentos\\jylneuralnet\\proyectosredessociales\\movil\\pomodorov1\\pomodoro\\components\\services\\interfaces\\itimerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|solutionrelative:pomodoro\\components\\services\\interfaces\\itimerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|c:\\users\\johnr\\documents\\documentos\\jylneuralnet\\proyectosredessociales\\movil\\pomodorov1\\pomodoro\\components\\services\\timerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB2B0443-B4AA-4F13-8F79-A4D01584ACC8}|Pomodoro\\Pomodoro.csproj|solutionrelative:pomodoro\\components\\services\\timerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 16,
           "Children": [
             {
               "$type": "Bookmark",
@@ -94,40 +90,107 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TimerService.cs",
-              "DocumentMoniker": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Services\\TimerService.cs",
-              "RelativeDocumentMoniker": "Pomodoro\\Components\\Services\\TimerService.cs",
-              "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Services\\TimerService.cs",
-              "RelativeToolTip": "Pomodoro\\Components\\Services\\TimerService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAArAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "MauiProgram.cs",
+              "DocumentMoniker": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\MauiProgram.cs",
+              "RelativeDocumentMoniker": "Pomodoro\\MauiProgram.cs",
+              "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\MauiProgram.cs",
+              "RelativeToolTip": "Pomodoro\\MauiProgram.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T01:20:51.954Z",
+              "WhenOpened": "2024-12-23T20:11:56.715Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 2,
+              "Title": "SecuenciaService.cs",
+              "DocumentMoniker": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Services\\SecuenciaService.cs",
+              "RelativeDocumentMoniker": "Pomodoro\\Components\\Services\\SecuenciaService.cs",
+              "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Services\\SecuenciaService.cs",
+              "RelativeToolTip": "Pomodoro\\Components\\Services\\SecuenciaService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAADwAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-23T18:48:42.466Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ISecuenciaService.cs",
+              "DocumentMoniker": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Services\\Interfaces\\ISecuenciaService.cs",
+              "RelativeDocumentMoniker": "Pomodoro\\Components\\Services\\Interfaces\\ISecuenciaService.cs",
+              "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Services\\Interfaces\\ISecuenciaService.cs",
+              "RelativeToolTip": "Pomodoro\\Components\\Services\\Interfaces\\ISecuenciaService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-23T18:48:34.605Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Secuencia.cs",
+              "DocumentMoniker": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Models\\Secuencia.cs",
+              "RelativeDocumentMoniker": "Pomodoro\\Components\\Models\\Secuencia.cs",
+              "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Models\\Secuencia.cs",
+              "RelativeToolTip": "Pomodoro\\Components\\Models\\Secuencia.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-23T18:43:49.779Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IConfiguracionService.cs",
+              "DocumentMoniker": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Services\\Interfaces\\IConfiguracionService.cs",
+              "RelativeDocumentMoniker": "Pomodoro\\Components\\Services\\Interfaces\\IConfiguracionService.cs",
+              "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Services\\Interfaces\\IConfiguracionService.cs",
+              "RelativeToolTip": "Pomodoro\\Components\\Services\\Interfaces\\IConfiguracionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-21T00:46:15.667Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "ConfigruacionService.cs",
               "DocumentMoniker": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Services\\ConfigruacionService.cs",
               "RelativeDocumentMoniker": "Pomodoro\\Components\\Services\\ConfigruacionService.cs",
               "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Services\\ConfigruacionService.cs",
               "RelativeToolTip": "Pomodoro\\Components\\Services\\ConfigruacionService.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T01:20:43.071Z"
+              "WhenOpened": "2024-12-21T00:17:31.95Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "MainLayout.razor",
-              "DocumentMoniker": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Layout\\MainLayout.razor",
-              "RelativeDocumentMoniker": "Pomodoro\\Components\\Layout\\MainLayout.razor",
-              "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Layout\\MainLayout.razor",
-              "RelativeToolTip": "Pomodoro\\Components\\Layout\\MainLayout.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "app.css",
+              "DocumentMoniker": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\wwwroot\\css\\app.css",
+              "RelativeDocumentMoniker": "Pomodoro\\wwwroot\\css\\app.css",
+              "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\wwwroot\\css\\app.css",
+              "RelativeToolTip": "Pomodoro\\wwwroot\\css\\app.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-12-19T02:21:04.314Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ConfiguracionPage.razor",
+              "DocumentMoniker": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Pages\\ConfiguracionPage.razor",
+              "RelativeDocumentMoniker": "Pomodoro\\Components\\Pages\\ConfiguracionPage.razor",
+              "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Pages\\ConfiguracionPage.razor",
+              "RelativeToolTip": "Pomodoro\\Components\\Pages\\ConfiguracionPage.razor",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABgAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-18T01:22:53.039Z"
+              "WhenOpened": "2024-12-19T02:10:53.38Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -135,114 +198,38 @@
               "Title": "PomodoroPage.razor",
               "DocumentMoniker": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Pages\\PomodoroPage.razor",
               "RelativeDocumentMoniker": "Pomodoro\\Components\\Pages\\PomodoroPage.razor",
-              "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Pages\\PomodoroPage.razor",
-              "RelativeToolTip": "Pomodoro\\Components\\Pages\\PomodoroPage.razor",
-              "ViewState": "AgIAADEAAAAAAAAAAAAkwEMAAAAoAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Pages\\PomodoroPage.razor*",
+              "RelativeToolTip": "Pomodoro\\Components\\Pages\\PomodoroPage.razor*",
+              "ViewState": "AgIAALQAAAAAAAAAAAAAANAAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-12-18T01:16:41.526Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ConfiguracionPage.razor",
-              "DocumentMoniker": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Pages\\ConfiguracionPage.razor",
-              "RelativeDocumentMoniker": "Pomodoro\\Components\\Pages\\ConfiguracionPage.razor",
-              "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Pages\\ConfiguracionPage.razor",
-              "RelativeToolTip": "Pomodoro\\Components\\Pages\\ConfiguracionPage.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-18T03:29:52.508Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "_Imports.razor",
-              "DocumentMoniker": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\_Imports.razor",
-              "RelativeDocumentMoniker": "Pomodoro\\Components\\_Imports.razor",
-              "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\_Imports.razor",
-              "RelativeToolTip": "Pomodoro\\Components\\_Imports.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-18T03:09:57.27Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "MauiProgram.cs",
-              "DocumentMoniker": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\MauiProgram.cs",
-              "RelativeDocumentMoniker": "Pomodoro\\MauiProgram.cs",
-              "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\MauiProgram.cs",
-              "RelativeToolTip": "Pomodoro\\MauiProgram.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T01:22:08.996Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "app.css",
-              "DocumentMoniker": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\wwwroot\\css\\app.css",
-              "RelativeDocumentMoniker": "Pomodoro\\wwwroot\\css\\app.css",
-              "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\wwwroot\\css\\app.css",
-              "RelativeToolTip": "Pomodoro\\wwwroot\\css\\app.css",
-              "ViewState": "AgIAAJ0AAAAAAAAAAADwv6wAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-12-18T01:25:39.335Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Configuracion.cs",
-              "DocumentMoniker": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Models\\Configuracion.cs",
-              "RelativeDocumentMoniker": "Pomodoro\\Components\\Models\\Configuracion.cs",
-              "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Models\\Configuracion.cs",
-              "RelativeToolTip": "Pomodoro\\Components\\Models\\Configuracion.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T01:21:46.513Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "IConfiguracionService.cs",
-              "DocumentMoniker": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Services\\Interfaces\\IConfiguracionService.cs",
-              "RelativeDocumentMoniker": "Pomodoro\\Components\\Services\\Interfaces\\IConfiguracionService.cs",
-              "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Services\\Interfaces\\IConfiguracionService.cs",
-              "RelativeToolTip": "Pomodoro\\Components\\Services\\Interfaces\\IConfiguracionService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T01:21:13.557Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Pomodoro.csproj",
-              "DocumentMoniker": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Pomodoro.csproj",
-              "RelativeDocumentMoniker": "Pomodoro\\Pomodoro.csproj",
-              "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Pomodoro.csproj",
-              "RelativeToolTip": "Pomodoro\\Pomodoro.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-12-18T03:10:51.676Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
               "Title": "ITimerService.cs",
               "DocumentMoniker": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Services\\Interfaces\\ITimerService.cs",
               "RelativeDocumentMoniker": "Pomodoro\\Components\\Services\\Interfaces\\ITimerService.cs",
               "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Services\\Interfaces\\ITimerService.cs",
               "RelativeToolTip": "Pomodoro\\Components\\Services\\Interfaces\\ITimerService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T01:21:03.556Z"
+              "WhenOpened": "2024-12-23T17:15:31.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "TimerService.cs",
+              "DocumentMoniker": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Services\\TimerService.cs",
+              "RelativeDocumentMoniker": "Pomodoro\\Components\\Services\\TimerService.cs",
+              "ToolTip": "C:\\Users\\johnr\\Documents\\Documentos\\JyLNeuralNet\\ProyectosRedesSociales\\Movil\\PomodoroV1\\Pomodoro\\Components\\Services\\TimerService.cs",
+              "RelativeToolTip": "Pomodoro\\Components\\Services\\TimerService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-23T18:18:05.918Z",
+              "EditorCaption": ""
             }
           ]
         },

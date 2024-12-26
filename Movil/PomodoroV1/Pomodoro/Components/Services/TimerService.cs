@@ -1,93 +1,66 @@
-﻿using Pomodoro.Components.Services.Interfaces;
-using System;
+﻿using System;
 using System.Timers;
+using Pomodoro.Components.Services.Interfaces;
 using Timer = System.Timers.Timer;
 
 namespace Pomodoro.Components.Services
 {
-    public class TimerService : ITimerService, IDisposable
+    public class TimerService : ITimerService
     {
         private Timer _timer;
-        private TimeSpan _timeRemaining;
-        private bool _isPaused = false;
+        private TimeSpan _tiempoTrabajo;
+        private TimeSpan _descansoCorto;
+        private TimeSpan _descansoLargo;
+        private TimeSpan _duracion;
+        private bool _isPaused;
 
+        public event Action<TimeSpan> OnTick;
+        public event Action OnPomodoroCompleted;
+        public event Action OnShortBreakCompleted;
+        public event Action OnLongBreakCompleted;
 
-        public event Action<TimeSpan> OnTimerTick;
-        public event Action OnTimerComplete;
-
-        public void PauseTimer()
+        public void StartPomodoro(TimeSpan tiempoTrabajo, TimeSpan descansoCorto, TimeSpan descansoLargo)
         {
-            if (_timer != null && _timer.Enabled)
-            {
-                _timer.Stop();
-                _isPaused = true;
-            }
-        }
-
-        public void RestarTimer(TimeSpan duration)
-        {
-            StopTimer();
-            StartTimer(duration);
-        }
-
-        public void StartTimer(TimeSpan duration)
-        {
-            _timeRemaining = duration;
+            _tiempoTrabajo = _tiempoTrabajo;
+            _descansoCorto = descansoCorto;
+            _descansoLargo = descansoLargo;
+            _duracion = _tiempoTrabajo;
             _isPaused = false;
 
-            if(_timer == null)
-            {
-                _timer = new Timer(1000);
-                _timer.Elapsed += TimerElapsed;
-                _timer.AutoReset = true;
-            }
-
+            _timer = new Timer(1000);
+            _timer.Elapsed += TimerElapsed;
             _timer.Start();
-            OnTimerTick?.Invoke(_timeRemaining);
-        }
-
-        public void StopTimer()
-        {
-            if (_timer != null)
-            {
-                _timer.Stop();
-                _timer.Dispose();
-                _timer = null;
-            }
-
-            _timeRemaining = TimeSpan.Zero;
-            _isPaused = false;
-            OnTimerTick?.Invoke(_timeRemaining);
         }
 
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
-            if (!_isPaused)
-            {
-                _timeRemaining = _timeRemaining.Subtract(TimeSpan.FromSeconds(1));
+            if (_isPaused) return;
 
-                if(_timeRemaining <= TimeSpan.Zero)
-                {
-                    _timer.Stop();
-                    OnTimerTick?.Invoke(TimeSpan.Zero);
-                    OnTimerComplete?.Invoke();
-                }
-                else
-                {
-                    OnTimerTick?.Invoke(_timeRemaining);
-                }
+            _duracion = _duracion.Subtract(TimeSpan.FromSeconds(1));
+            OnTick?.Invoke(_duracion);
+
+            if (_duracion.TotalSeconds <= 0)
+            {
+                _timer.Stop();
+                OnPomodoroCompleted?.Invoke();
             }
         }
 
-        public void Dispose()
+        public void Pause()
         {
-            if (_timer != null)
-            {
-                _timer.Stop();
-                _timer.Elapsed -= TimerElapsed;
-                _timer.Dispose();
-                _timer = null;
-            }
+            _isPaused = true;
+        }
+
+        public void Resume()
+        {
+            _isPaused = false;
+        }
+
+        public void Stop()
+        {
+            _timer?.Stop();
+            _timer?.Dispose();
+            _timer = null;
         }
     }
 }

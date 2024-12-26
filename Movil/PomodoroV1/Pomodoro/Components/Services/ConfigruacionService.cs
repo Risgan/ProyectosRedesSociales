@@ -12,56 +12,38 @@ namespace Pomodoro.Components.Services
 {
     public class ConfigruacionService : IConfiguracionService
     {
-
-        private const string ConfiguracionKey = "ConfiguracionPomodoro";
-
-        private readonly Configuracion configuracionPorDefecto = new Configuracion
-        {
+        
+        private Configuracion _configuracion = new Configuracion() {
             TiempoTrabajo = 25,
             TiempoDescansoCorto = 5,
             TiempoDescansoLargo = 15
         };
 
-        public async Task ActualizarConfiguracionAsync(Configuracion nuevaConfiguracion)
+
+        public ConfigruacionService()
         {
-            if(nuevaConfiguracion == null)
-            {
-                throw new ArgumentNullException(nameof(nuevaConfiguracion));
-            }
 
-            if (nuevaConfiguracion.TiempoTrabajo <= 0 || 
-                nuevaConfiguracion.TiempoDescansoCorto <= 0 ||
-                nuevaConfiguracion.TiempoDescansoLargo <=0)
-            {
-                throw new ArgumentException("El tiempo debe ser mayor a 0", nameof(nuevaConfiguracion));
-            }
-
-            string configuracionJson = JsonConvert.SerializeObject(nuevaConfiguracion);
-
-            Preferences.Set(ConfiguracionKey, configuracionJson);
-
-            await Task.CompletedTask;
         }
 
-        public async Task<Configuracion> ObtenerConfiguracionAsync()
+        public Configuracion GetConfiguracion()
         {
-            string configuracionJson = Preferences.Get(ConfiguracionKey, string.Empty);
-
-            if (string.IsNullOrEmpty(configuracionJson))
-            {
-                return configuracionPorDefecto;
-            }
-
-            try
-            {
-                Configuracion config = JsonConvert.DeserializeObject<Configuracion>(configuracionJson);
-                return config ?? configuracionPorDefecto;
-            }
-            catch (Exception)
-            {
-
-                return configuracionPorDefecto;
-            }
+            return _configuracion;
         }
+
+        public void SetConfiguracion(Configuracion configuracion)
+        {
+            _configuracion = configuracion;
+        }
+
+        public void ResetDefault()
+        {
+            _configuracion = new Configuracion()
+            {
+                TiempoTrabajo = 25,
+                TiempoDescansoCorto = 5,
+                TiempoDescansoLargo = 15
+            };
+        }
+        
     }
 }
