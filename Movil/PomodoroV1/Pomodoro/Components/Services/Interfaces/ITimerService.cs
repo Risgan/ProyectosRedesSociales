@@ -12,6 +12,7 @@ namespace Pomodoro.Components.Services.Interfaces
         event Action OnPomodoroCompleted;
         event Action OnShortBreakCompleted;
         event Action OnLongBreakCompleted;
+        event Action<bool> IsPaused;
 
         void StartPomodoro(TimeSpan tiempoTrabajo, TimeSpan descansoCorto, TimeSpan descansoLargo);
         void Pause();

@@ -18,6 +18,7 @@ namespace Pomodoro.Components.Services
         public event Action OnPomodoroCompleted;
         public event Action OnShortBreakCompleted;
         public event Action OnLongBreakCompleted;
+        public event Action<bool> IsPaused;
 
         public void StartPomodoro(TimeSpan tiempoTrabajo, TimeSpan descansoCorto, TimeSpan descansoLargo)
         {
@@ -27,7 +28,8 @@ namespace Pomodoro.Components.Services
             _duracion = _tiempoTrabajo;
             _isPaused = false;
 
-            _timer = new Timer(1000);
+            //_timer = new Timer(1000);
+            _timer = new Timer(200);
             _timer.Elapsed += TimerElapsed;
             _timer.Start();
         }
@@ -49,11 +51,13 @@ namespace Pomodoro.Components.Services
         public void Pause()
         {
             _isPaused = true;
+            notifyPause();
         }
 
         public void Resume()
         {
             _isPaused = false;
+            notifyPause();
         }
 
         public void Stop()
@@ -61,6 +65,11 @@ namespace Pomodoro.Components.Services
             _timer?.Stop();
             _timer?.Dispose();
             _timer = null;
+        }
+
+        private void notifyPause()
+        {
+            IsPaused.Invoke(_isPaused);
         }
     }
 }
