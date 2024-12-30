@@ -1,0 +1,98 @@
+<div class="d-flex justify-content-center align-items-start" style="height: 80vh; margin-top: 20px;">
+    <div
+      class="card p-4"
+      style="width: 600px; background-color: #f0f8ff; border-radius: 15px;"
+    >
+      <div class="card-body">
+        <h1 class="text-center text-primary">Información básica</h1>
+        @if (cliente) {
+
+            <form class="mt-4">
+              <div class="mb-3">
+                <label for="primerNombre" class="form-label text-primary">Primer Nombre</label>
+                <input
+                  type="text"
+                  id="primerNombre"
+                  class="form-control"
+                  [value]="cliente.primerNombre"
+                  readonly
+                />
+              </div>
+              <div class="mb-3">
+                <label for="segundoNombre" class="form-label text-primary">Segundo Nombre</label>
+                <input
+                  type="text"
+                  id="segundoNombre"
+                  class="form-control"
+                  [value]="cliente.segundoNombre"
+                  readonly
+                />
+              </div>
+              <div class="mb-3">
+                <label for="primerApellido" class="form-label text-primary">Primer Apellido</label>
+                <input
+                  type="text"
+                  id="primerApellido"
+                  class="form-control"
+                  [value]="cliente.primerApellido"
+                  readonly
+                />
+              </div>
+              <div class="mb-3">
+                <label for="segundoApellido" class="form-label text-primary">Segundo Apellido</label>
+                <input
+                  type="text"
+                  id="segundoApellido"
+                  class="form-control"
+                  [value]="cliente.segundoApellido"
+                  readonly
+                />
+              </div>
+              <div class="mb-3">
+                <label for="telefono" class="form-label text-primary">Teléfono</label>
+                <input
+                  type="text"
+                  id="telefono"
+                  class="form-control"
+                  [value]="cliente.telefono"
+                  readonly
+                />
+              </div>
+              <div class="mb-3">
+                <label for="direccion" class="form-label text-primary">Dirección</label>
+                <input
+                  type="text"
+                  id="direccion"
+                  class="form-control"
+                  [value]="cliente.direccion"
+                  readonly
+                />
+              </div>
+              <div class="mb-3">
+                <label for="ciudadResidencia" class="form-label text-primary">Ciudad de Residencia</label>
+                <input
+                  type="text"
+                  id="ciudadResidencia"
+                  class="form-control"
+                  [value]="cliente.ciudadResidencia"
+                  readonly
+                />
+              </div>
+            </form>
+        }
+        @else {
+          <h3 class="text-center text-secondary">No se encontró información para el cliente</h3>
+        }
+        <div class="text-center mt-4">
+          <button
+            class="btn btn-primary w-100"
+            style="border-radius: 50px; height: 50px;"
+            (click)="volver()"
+          >
+            Volver
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

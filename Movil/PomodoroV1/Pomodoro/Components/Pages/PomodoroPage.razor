@@ -1,0 +1,332 @@
+﻿@page "/"
+@using Pomodoro.Components.Models
+@using Pomodoro.Components.Services.Interfaces
+@inject IConfiguracionService ConfigService;
+@inject ITimerService TimerService;
+@inject ISecuenciaService SecuenciaService;
+@inject NavigationManager NavigationManager;
+@inject IJSRuntime JSRuntime;
+
+
+@if (estado != Secuencia.Empezar)
+{
+        <div class="botones">
+        @if (isPause)
+        {
+                    <button class="btn btn-danger radius" @onclick="Detener">Detener</button>
+        }
+        else
+        {
+                    <button class="btn btn-primary radius" @onclick="Pausar">Pause</button>
+        }
+        </div>
+}
+
+<div class="contenedor @colorClass" @onclick="estado == Secuencia.Empezar || estado == Secuencia.Finalizado ? Inicar : Pausar">
+    <div class="pomodoro">
+        <div class="target">
+            <div class="contador">
+                @if (tiempo.Hours > 0)
+                {
+                    @tiempo.ToString(@"hh\:mm\:ss")
+                }
+                else if (tiempo.Minutes > 0)
+                {
+                    @tiempo.ToString(@"mm\:ss")
+                }
+                else
+                {
+                    @tiempo.ToString(@"ss")
+                }
+            </div>
+            <div class="estado">
+                @SecuenciaNombres.Where(data => data.Key == estado).FirstOrDefault().Value
+            </div>
+            @if (estado == Secuencia.Empezar)
+            {
+                    <div class="texto">
+                        <h4>Toque la  pantalla para comenzar</h4>
+                    </div>
+            }
+        </div>
+    </div>
+</div>
+
+@if (estado == Secuencia.Empezar)
+{
+        <div class="configuracion">
+            <i @onclick="Config" class="bi bi-gear-fill"></i>
+        </div>
+}
+
+<audio id="audioPlayer" src="sounds/alarm.mp3" preload="auto"></audio>
+
+
+@code {
+    private string colorClass;
+    private Configuracion configuracion;
+
+    // private int hours = 0;
+    // private int minuts = 1;
+    // private int seconds = 3;
+
+    private Secuencia estado = Secuencia.Empezar;
+    private TimeSpan tiempo;
+    private int secuenciaId = 0;
+
+    private System.Threading.Timer timer;
+
+    private bool isPause = false;
+
+    private Dictionary<Secuencia, string> SecuenciaNombres = new()
+    {
+        { Secuencia.Empezar,       "Empezar" },
+        { Secuencia.Trabajo,       "Trabajo" },
+        { Secuencia.DescansoCorto, "Descanso Corto" },
+        { Secuencia.DescansoLargo, "Descanso Largo" },
+        { Secuencia.Finalizado,    "Finalizado" }
+    };
+
+    protected override void OnInitialized()
+    {
+        colorClass = "colorRed";
+
+        ConfigTimer();
+
+        // tiempo = new TimeSpan(hours, minuts, seconds);
+        estado = SecuenciaService.GetEjecucionById(secuenciaId);
+
+        TimerService.OnTick += HandleTick;
+        TimerService.OnPomodoroCompleted += HandlePomodoroCompleted;
+        TimerService.IsPaused += HandleIsPaused;
+
+    }
+
+    private void Config()
+    {
+        NavigationManager.NavigateTo("/configuracion");
+    }
+
+    private void ConfigTimer()
+    {
+        configuracion = ConfigService.GetConfiguracion();
+        tiempo = TimeSpan.FromMinutes(configuracion.TiempoTrabajo);
+        TimerService.ConfigPomodoro(
+            TimeSpan.FromMinutes(configuracion.TiempoTrabajo),
+            TimeSpan.FromMinutes(configuracion.TiempoDescansoCorto),
+            TimeSpan.FromMinutes(configuracion.TiempoDescansoLargo)
+        );
+    }
+
+    private void Inicar()
+    {
+        secuenciaId++;
+        estado = SecuenciaService.GetEjecucionById(secuenciaId);
+        switch (estado)
+        {
+
+            case Secuencia.Empezar:
+                colorClass = "colorRed";
+                TimerService.SetDuration(TimeSpan.FromMinutes(configuracion.TiempoTrabajo));
+                break;
+            case Secuencia.Trabajo:
+                colorClass = "colorGreen";
+                TimerService.SetDuration(TimeSpan.FromMinutes(configuracion.TiempoTrabajo));
+                break;
+            case Secuencia.DescansoCorto:
+                colorClass = "colorBlue";
+                TimerService.SetDuration(TimeSpan.FromMinutes(configuracion.TiempoDescansoCorto));
+                break;
+            case Secuencia.DescansoLargo:
+                colorClass = "colorPurple";
+                TimerService.SetDuration(TimeSpan.FromMinutes(configuracion.TiempoDescansoLargo));
+                break;
+            case Secuencia.Finalizado:
+                colorClass = "colorRed";
+                TimerService.SetDuration(TimeSpan.FromMinutes(configuracion.TiempoTrabajo));
+                break;
+
+
+            default:
+                break;
+        }
+
+        if (estado != Secuencia.Finalizado)
+        {
+            TimerService.StartPomodoro();
+        }
+        else
+        {
+            secuenciaId = 0;
+            estado = SecuenciaService.GetEjecucionById(0);
+            tiempo = TimeSpan.FromMinutes(configuracion.TiempoTrabajo);
+            InvokeAsync(StateHasChanged);
+            // Inicar();
+        }
+
+
+    }
+
+    private void Pausar()
+    {
+        if (isPause)
+        {
+            TimerService.Resume();
+        }
+        else
+        {
+            TimerService.Pause();
+        }
+
+    }
+
+    private void EjecutarAccion()
+    {
+        switch (SecuenciaService.GetSecuenciaById(secuenciaId))
+        {
+            case Secuencia.Empezar:
+                break;
+            case Secuencia.Trabajo:
+                break;
+            case Secuencia.DescansoCorto:
+                break;
+            case Secuencia.DescansoLargo:
+                break;
+            case Secuencia.Finalizado:
+                break;
+        }
+    }
+
+    private void Tick(object state)
+    {
+        if (tiempo.TotalSeconds > 0)
+        {
+            tiempo = tiempo.Subtract(TimeSpan.FromSeconds(1));
+            InvokeAsync(StateHasChanged);
+        }
+        else
+        {
+            timer.Dispose();
+            timer = null;
+        }
+    }
+
+    private void Detener()
+    {
+        TimerService.Stop();
+
+        secuenciaId = 0;
+        colorClass = "colorRed";
+        estado = SecuenciaService.GetEjecucionById(0);
+        tiempo = TimeSpan.FromMinutes(configuracion.TiempoTrabajo);
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void HandleTick(TimeSpan remainingTime)
+    {
+        tiempo = remainingTime;
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void HandlePomodoroCompleted()
+    {
+        PlaySound();
+        TimerService.Stop();
+
+        Inicar();
+
+        // estado = "Pomodoro Completado";
+        // InvokeAsync(StateHasChanged);
+    }
+
+    private void HandleIsPaused(bool paused)
+    {
+        isPause = paused;
+        // estado = isPaused ? "Pausado" : "Trabajando";
+        InvokeAsync(StateHasChanged);
+    }
+
+    private async void PlaySound()
+    {
+        await JSRuntime.InvokeVoidAsync("playAudio");
+    }
+
+    private async void StopSound()
+    {
+        await JSRuntime.InvokeVoidAsync("stopAudio");
+    }
+}
+
+<style>
+    .contenedor {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .colorRed {
+        background: #FFCADE;
+        color: #EF2D30;
+    }
+
+    .colorGreen {
+        background: #E1F7E8;
+        color: #01FE52;
+    }
+
+    .colorBlue {
+        background: #C6DBFA;
+        color: #0067FF;
+    }
+
+    .colorPurple {
+        background: #DCC9F4;
+        color: #7000FE;
+    }
+
+    .colorYellow {
+        background: #FAF1C8;
+        color: #FBD010;
+    }
+
+    .botones {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+    .configuracion {
+        font-size: 2rem;
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        color: #EF2D30;
+    }
+
+    .target {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        font-size: 3.8rem;
+        font-weight: 400;
+        font-family: Inter;
+    }
+
+    .radius {
+        border-radius: 15px;
+    }
+
+    .estado {
+        text-align: center;
+    }
+
+    .texto {
+        position: relative;
+        width: 100%;
+        text-align: center;
+        color: white;
+    }
+
+</style>

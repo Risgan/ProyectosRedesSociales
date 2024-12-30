@@ -1,0 +1,146 @@
+﻿@page "/configuracion"
+@using Pomodoro.Components.Models;
+@using Pomodoro.Components.Services.Interfaces
+@inject IConfiguracionService ConfigService;
+@inject NavigationManager NavigationManager;
+
+<div class="contenedor">
+    <div class="botones">
+
+        <button class="btn btn-danger raduis" @onclick="Regresar">Regresar</button>
+        <button class="btn btn-primary raduis" @onclick="Guardar">Guardar</button>
+
+    </div>
+    <div class="contenedor-config">
+
+        <div class="cuadros aling-left">
+            <div class="title">
+                <h2>Tiempo Trabajo:</h2>
+                <input class="border-1 bg-white raduis size " type="number" @bind-value="_configuracion.TiempoTrabajo" />
+            </div>
+        </div>
+
+        <div class="cuadros aling-right">
+            <div class="title">
+                <h2>Tiempo Descanso Corto:</h2>
+                <input class="border-1 bg-white raduis size " type="number" @bind-value="_configuracion.TiempoDescansoCorto" />
+            </div>
+        </div>
+
+        <div class="cuadros aling-left">
+            <div class="title">
+                <h2>Tiempo  Descanso Largo:</h2>
+                <input class="border-1 bg-white raduis size " type="number" @bind-value="_configuracion.TiempoDescansoLargo" />
+            </div>
+        </div>
+    </div>
+
+    <div class="nota">
+        <p>
+            Establece los tiempos que se <br />
+            ejecutaran en cada ciclo en minutos
+        </p>
+    </div>
+</div>
+
+@code {
+    Configuracion _configuracion;
+
+    protected override void OnInitialized()
+    {
+        _configuracion = ConfigService.GetConfiguracion();
+    }
+
+    private void Guardar()
+    {
+        ConfigService.SetConfiguracion(_configuracion);
+        Regresar();
+    }
+
+    private void Regresar()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}
+
+
+<style>
+    .contenedor {
+        background: #FFCADE;
+        width: 100%;
+        height: 100vh;
+    }
+
+    .botones {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        align-items: center;
+        flex-direction: row;
+        padding-top: 10px;
+        padding-right: 10px;
+        color: white;
+    }
+
+    .raduis {
+        border-radius: 15px;
+    }
+
+    .contenedor-config {
+        padding-top:50px;
+        height: 80%;        
+        display: flex;
+        flex-direction: column;
+        /* justify-content: space-between; */
+        gap:30px;
+    }
+
+    .size {
+        /* height */
+        color: #000;
+        text-align: center;
+        font-family: Inter;
+        font-size: 25px;
+        font-style: normal;
+        /* font-weight: 400; */
+        line-height: normal;
+
+        width: 120px;
+        height: 50px;
+        border-radius:15px;
+    }
+
+    .aling-left{
+        text-align: start;
+    }
+
+    .aling-right {
+        text-align: end;
+    }
+
+    .cuadros{
+        padding-left: 10px;
+        padding-right: 10px;
+        width: 100%;
+        /* text-align:end; */
+
+    }
+
+    .title{
+        display:flex;
+        flex-direction: column;
+        /* justify-content:center; */
+        align-items: center;
+    }
+
+    .nota {
+        position: absolute;
+        bottom: 20px;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: #7C7272;
+    }
+</style>
