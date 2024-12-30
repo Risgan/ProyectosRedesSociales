@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pomodoro.Components.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,10 +15,12 @@ namespace Pomodoro.Components.Services.Interfaces
         event Action OnLongBreakCompleted;
         event Action<bool> IsPaused;
 
-        void StartPomodoro(TimeSpan tiempoTrabajo, TimeSpan descansoCorto, TimeSpan descansoLargo);
+        void ConfigPomodoro(TimeSpan tiempoTrabajo, TimeSpan descansoCorto, TimeSpan descansoLargo);
+        void StartPomodoro();
         void Pause();
         void Resume();
         void Stop();
+        void SetDuration(TimeSpan duracion);
 
     }
 }

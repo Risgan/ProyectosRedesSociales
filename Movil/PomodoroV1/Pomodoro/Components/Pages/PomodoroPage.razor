@@ -5,22 +5,24 @@
 @inject ITimerService TimerService;
 @inject ISecuenciaService SecuenciaService;
 @inject NavigationManager NavigationManager;
+@inject IJSRuntime JSRuntime;
+
 
 @if (estado != Secuencia.Empezar)
 {
-    <div class="botones">
+        <div class="botones">
         @if (isPause)
         {
-            <button class="btn btn-danger radius" @onclick="Detener">Detener</button>
+                    <button class="btn btn-danger radius" @onclick="Detener">Detener</button>
         }
         else
         {
-            <button class="btn btn-primary radius" @onclick="Pausar">Pause</button>
+                    <button class="btn btn-primary radius" @onclick="Pausar">Pause</button>
         }
-    </div>
+        </div>
 }
 
-<div class="contenedor @colorClass" @onclick="Pausar">
+<div class="contenedor @colorClass" @onclick="estado == Secuencia.Empezar || estado == Secuencia.Finalizado ? Inicar : Pausar">
     <div class="pomodoro">
         <div class="target">
             <div class="contador">
@@ -42,9 +44,9 @@
             </div>
             @if (estado == Secuencia.Empezar)
             {
-                <div class="texto">
-                    <h4>Toque la  pantalla para comenzar</h4>
-                </div>
+                    <div class="texto">
+                        <h4>Toque la  pantalla para comenzar</h4>
+                    </div>
             }
         </div>
     </div>
@@ -52,18 +54,21 @@
 
 @if (estado == Secuencia.Empezar)
 {
-    <div class="configuracion">
-        <i @onclick="Config" class="bi bi-gear-fill"></i>
-    </div>
+        <div class="configuracion">
+            <i @onclick="Config" class="bi bi-gear-fill"></i>
+        </div>
 }
+
+<audio id="audioPlayer" src="sounds/alarm.mp3" preload="auto"></audio>
+
 
 @code {
     private string colorClass;
     private Configuracion configuracion;
 
-    private int hours = 0;
-    private int minuts = 1;
-    private int seconds = 3;
+    // private int hours = 0;
+    // private int minuts = 1;
+    // private int seconds = 3;
 
     private Secuencia estado = Secuencia.Empezar;
     private TimeSpan tiempo;
@@ -85,13 +90,16 @@
     protected override void OnInitialized()
     {
         colorClass = "colorRed";
-        configuracion = ConfigService.GetConfiguracion();
-        tiempo = new TimeSpan(hours, minuts, seconds);
+
+        ConfigTimer();
+
+        // tiempo = new TimeSpan(hours, minuts, seconds);
         estado = SecuenciaService.GetEjecucionById(secuenciaId);
 
-        // TimerService.OnTick += HandleTick;
-        // TimerService.OnPomodoroCompleted += HandlePomodoroCompleted;
+        TimerService.OnTick += HandleTick;
+        TimerService.OnPomodoroCompleted += HandlePomodoroCompleted;
         TimerService.IsPaused += HandleIsPaused;
+
     }
 
     private void Config()
@@ -99,29 +107,77 @@
         NavigationManager.NavigateTo("/configuracion");
     }
 
-    private void Inicar()
+    private void ConfigTimer()
     {
-        TimerService.StartPomodoro(
+        configuracion = ConfigService.GetConfiguracion();
+        tiempo = TimeSpan.FromMinutes(configuracion.TiempoTrabajo);
+        TimerService.ConfigPomodoro(
             TimeSpan.FromMinutes(configuracion.TiempoTrabajo),
             TimeSpan.FromMinutes(configuracion.TiempoDescansoCorto),
             TimeSpan.FromMinutes(configuracion.TiempoDescansoLargo)
         );
     }
 
-    private void Pausar()
+    private void Inicar()
     {
-        TimerService.Pause();
-
-        estado = Secuencia.DescansoCorto;
-        if (timer == null)
+        secuenciaId++;
+        estado = SecuenciaService.GetEjecucionById(secuenciaId);
+        switch (estado)
         {
-            timer = new System.Threading.Timer(Tick, null, 0, 200);
+
+            case Secuencia.Empezar:
+                colorClass = "colorRed";
+                TimerService.SetDuration(TimeSpan.FromMinutes(configuracion.TiempoTrabajo));
+                break;
+            case Secuencia.Trabajo:
+                colorClass = "colorGreen";
+                TimerService.SetDuration(TimeSpan.FromMinutes(configuracion.TiempoTrabajo));
+                break;
+            case Secuencia.DescansoCorto:
+                colorClass = "colorBlue";
+                TimerService.SetDuration(TimeSpan.FromMinutes(configuracion.TiempoDescansoCorto));
+                break;
+            case Secuencia.DescansoLargo:
+                colorClass = "colorPurple";
+                TimerService.SetDuration(TimeSpan.FromMinutes(configuracion.TiempoDescansoLargo));
+                break;
+            case Secuencia.Finalizado:
+                colorClass = "colorRed";
+                TimerService.SetDuration(TimeSpan.FromMinutes(configuracion.TiempoTrabajo));
+                break;
+
+
+            default:
+                break;
+        }
+
+        if (estado != Secuencia.Finalizado)
+        {
+            TimerService.StartPomodoro();
         }
         else
         {
-            timer.Dispose();
-            timer = null;
+            secuenciaId = 0;
+            estado = SecuenciaService.GetEjecucionById(0);
+            tiempo = TimeSpan.FromMinutes(configuracion.TiempoTrabajo);
+            InvokeAsync(StateHasChanged);
+            // Inicar();
         }
+
+
+    }
+
+    private void Pausar()
+    {
+        if (isPause)
+        {
+            TimerService.Resume();
+        }
+        else
+        {
+            TimerService.Pause();
+        }
+
     }
 
     private void EjecutarAccion()
@@ -157,22 +213,28 @@
 
     private void Detener()
     {
-        timer?.Dispose();
-        timer = null;
-        tiempo = new TimeSpan(hours, minuts, seconds);
-        estado = Secuencia.Empezar;
-        isPause = false;
-        StateHasChanged();
+        TimerService.Stop();
+
+        secuenciaId = 0;
+        colorClass = "colorRed";
+        estado = SecuenciaService.GetEjecucionById(0);
+        tiempo = TimeSpan.FromMinutes(configuracion.TiempoTrabajo);
+        InvokeAsync(StateHasChanged);
     }
 
     private void HandleTick(TimeSpan remainingTime)
     {
-        // tiempo = remainingTime;
-        // InvokeAsync(StateHasChanged);
+        tiempo = remainingTime;
+        InvokeAsync(StateHasChanged);
     }
 
     private void HandlePomodoroCompleted()
     {
+        PlaySound();
+        TimerService.Stop();
+
+        Inicar();
+
         // estado = "Pomodoro Completado";
         // InvokeAsync(StateHasChanged);
     }
@@ -182,6 +244,16 @@
         isPause = paused;
         // estado = isPaused ? "Pausado" : "Trabajando";
         InvokeAsync(StateHasChanged);
+    }
+
+    private async void PlaySound()
+    {
+        await JSRuntime.InvokeVoidAsync("playAudio");
+    }
+
+    private async void StopSound()
+    {
+        await JSRuntime.InvokeVoidAsync("stopAudio");
     }
 }
 

@@ -27,6 +27,21 @@
     </div>
 
     <script src="_framework/blazor.webview.js" autostart="false"></script>
+    <script>
+        function playAudio() {
+            var audio = document.getElementById('audioPlayer');
+            audio.play();
+            setTimeout(function () {
+                stopAudio();
+            }, 5000);
+        }
+
+        function stopAudio() {
+            var audio = document.getElementById('audioPlayer');
+            audio.pause();
+            audio.currentTime = 0;
+        }
+    </script>
 
 </body>
 

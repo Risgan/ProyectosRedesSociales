@@ -12,17 +12,13 @@ namespace Pomodoro.Components.Services
 {
     public class ConfigruacionService : IConfiguracionService
     {
-        
-        private Configuracion _configuracion = new Configuracion() {
-            TiempoTrabajo = 25,
-            TiempoDescansoCorto = 5,
-            TiempoDescansoLargo = 15
-        };
+
+        private Configuracion _configuracion;
 
 
         public ConfigruacionService()
         {
-
+            ResetDefault();
         }
 
         public Configuracion GetConfiguracion()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Timers;
+using Pomodoro.Components.Models;
 using Pomodoro.Components.Services.Interfaces;
 using Timer = System.Timers.Timer;
 
@@ -14,22 +15,26 @@ namespace Pomodoro.Components.Services
         private TimeSpan _duracion;
         private bool _isPaused;
 
+        private int timeExecution = 10;
+
         public event Action<TimeSpan> OnTick;
         public event Action OnPomodoroCompleted;
         public event Action OnShortBreakCompleted;
         public event Action OnLongBreakCompleted;
         public event Action<bool> IsPaused;
 
-        public void StartPomodoro(TimeSpan tiempoTrabajo, TimeSpan descansoCorto, TimeSpan descansoLargo)
+        public void ConfigPomodoro(TimeSpan tiempoTrabajo, TimeSpan descansoCorto, TimeSpan descansoLargo)
         {
-            _tiempoTrabajo = _tiempoTrabajo;
+            _tiempoTrabajo = tiempoTrabajo;
             _descansoCorto = descansoCorto;
             _descansoLargo = descansoLargo;
-            _duracion = _tiempoTrabajo;
+            SetDuration(_tiempoTrabajo);
             _isPaused = false;
+        }
 
-            //_timer = new Timer(1000);
-            _timer = new Timer(200);
+        public void StartPomodoro()
+        {
+            _timer = new Timer(timeExecution);
             _timer.Elapsed += TimerElapsed;
             _timer.Start();
         }
@@ -43,7 +48,7 @@ namespace Pomodoro.Components.Services
 
             if (_duracion.TotalSeconds <= 0)
             {
-                _timer.Stop();
+                Stop();
                 OnPomodoroCompleted?.Invoke();
             }
         }
@@ -65,6 +70,12 @@ namespace Pomodoro.Components.Services
             _timer?.Stop();
             _timer?.Dispose();
             _timer = null;
+            Resume();
+        }
+
+        public void SetDuration(TimeSpan duracion)
+        {
+            _duracion = duracion;
         }
 
         private void notifyPause()
