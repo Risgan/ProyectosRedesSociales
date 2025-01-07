@@ -15,7 +15,7 @@ namespace Pomodoro.Components.Services
         private TimeSpan _duracion;
         private bool _isPaused;
 
-        private int timeExecution = 10;
+        private int timeExecution = 1000;
 
         public event Action<TimeSpan> OnTick;
         public event Action OnPomodoroCompleted;
