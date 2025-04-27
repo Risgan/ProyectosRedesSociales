@@ -1,0 +1,54 @@
+sequenceDiagram
+    actor u as User
+
+    participant f as Frontend
+    participant b as Backend
+
+    %% Postgress
+    participant db as DataBase - Postgress
+
+
+    u ->>+ f: Interacción
+
+        f ->>+ b: Peticion
+            
+
+            %% Escritorio
+            f ->> b: Python
+            f ->> b: Windows Form
+            f ->> b: VBA
+            
+            %% Web
+            f ->> b: Blazor
+            f ->> b: Angular
+            f ->> b: React
+            f ->> b: Vue
+
+            %% Movil
+            f ->> b: Ionic
+            f ->> b: MAUI
+
+
+            b ->>+ db: Conexion
+
+                b ->> db: NodeJS
+                b ->> db: .Net Core
+                b ->> db: SpringBoot
+                b ->> db: FastApi
+                b ->> db: Django
+                b ->> db: Java
+                b ->> db: rust
+                b ->> db: phoenix
+                b ->> db: Go
+
+            
+            db -->>- b: Respuesta
+        
+        b -->>- f: Respuesta Api
+
+    f -->>- u: Respuestas
+
+
+
+
+

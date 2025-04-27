@@ -4,3 +4,6 @@
 /SistemaInventario/NetCoreC#/SistemaInventario/SistemaInventario/bin
 /Movil/PomodoroV1/.vs
 /SistemaInventario/NetCoreC#/SistemaInventario/.vs
+
+**/bin/
+**/obj/
